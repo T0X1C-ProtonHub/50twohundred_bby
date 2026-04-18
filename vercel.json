@@ -21,7 +21,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "/home",
+      "destination": "/warning",
       "permanent": false
     }
   ]
