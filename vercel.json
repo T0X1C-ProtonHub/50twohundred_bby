@@ -21,7 +21,7 @@
   "redirects": [
     {
       "source": "/",
-      "destination": "",
+      "destination": "warn.html",
       "permanent": false
     }
   ]
