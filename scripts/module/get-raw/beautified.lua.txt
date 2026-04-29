@@ -7303,7 +7303,7 @@ local aa=a.c()
 local ab=a.H().New
 local ac=a.I().New
 
-local ad={}
+local ad={}    
 
 function ad.New(ae,af)
     local ag={
@@ -7311,6 +7311,7 @@ function ad.New(ae,af)
         Title=af.Title or "Toggle",
         Desc=af.Desc or nil,
         Tag=af.Tag,
+        TagColor=af.TagColor or Color3.fromRGB(0, 0, 0),
         Locked=af.Locked or false,
         LockedTitle=af.LockedTitle,
         Value=af.Value,
@@ -7367,37 +7368,48 @@ function ad.New(ae,af)
     end
         
     aj.AnchorPoint=Vector2.new(1,0.5)
-    aj.Position=UDim2.new(1,0,0.5,0)
+    aj.Position=UDim2.new(1,-10,0.5,0)
     
     if ag.Tag then
         local tagFrame = Instance.new("Frame")
         tagFrame.Name = "TagFrame"
         tagFrame.Parent = ag.ToggleFrame.UIElements.Main
-        tagFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-        tagFrame.Position = UDim2.new(0, 5, 0, 5)
-        tagFrame.Size = UDim2.new(0, 40, 0, 16)
+        tagFrame.BackgroundColor3 = ag.TagColor
+        tagFrame.Position = UDim2.new(0, 10, 0, 6)
+        tagFrame.Size = UDim2.new(0, 0, 0, 20)
+        tagFrame.AutomaticSize = Enum.AutomaticSize.X
         tagFrame.BorderSizePixel = 0
         
         local tagCorner = Instance.new("UICorner")
-        tagCorner.CornerRadius = UDim.new(0, 4)
+        tagCorner.CornerRadius = UDim.new(0, 6)
         tagCorner.Parent = tagFrame
         
+        local tagPadding = Instance.new("UIPadding")
+        tagPadding.PaddingLeft = UDim.new(0, 8)
+        tagPadding.PaddingRight = UDim.new(0, 8)
+        tagPadding.Parent = tagFrame
+
         local tagLabel = Instance.new("TextLabel")
         tagLabel.Name = "TagLabel"
         tagLabel.Parent = tagFrame
         tagLabel.BackgroundTransparency = 1
-        tagLabel.Size = UDim2.new(1, 0, 1, 0)
-        tagLabel.Font = Enum.Font.GothamSemibold
+        tagLabel.Size = UDim2.new(0, 0, 1, 0)
+        tagLabel.AutomaticSize = Enum.AutomaticSize.X
+        tagLabel.Font = Font.new("rbxassetid://12187365364", Enum.FontWeight.Medium)
         tagLabel.Text = tostring(ag.Tag)
-        tagLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-        tagLabel.TextSize = 10
+        tagLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        tagLabel.TextSize = 11
         
         ag.UIElements.TagFrame = tagFrame
         ag.UIElements.TagLabel = tagLabel
         
-        function ag.SetTag(newText)
+        function ag.SetTag(newText, newColor)
             ag.Tag = newText
             tagLabel.Text = tostring(newText)
+            if newColor then
+                ag.TagColor = newColor
+                tagFrame.BackgroundColor3 = newColor
+            end
         end
     end
     
